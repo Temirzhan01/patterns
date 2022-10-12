@@ -1,4 +1,4 @@
-﻿namespace Project_practice.Classes
+﻿namespace Project_practice.Classes.Proxy.Proxy
 {
     interface Page
     {

@@ -1,7 +1,7 @@
 ﻿using Project_practice.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Project_practice.Classes
+namespace Project_practice.Classes.Proxy
 {
     public class Proxy : Page
     {
@@ -14,12 +14,12 @@ namespace Project_practice.Classes
                 if (logi?.Any() ?? false)
                 {
                     RealPage realPage = new RealPage();
-                    return realPage.Ischeck(log,pass);
+                    return realPage.Ischeck(log, pass);
                 }
                 else
                 {
                     UnrealPage unrealPage = new UnrealPage();
-                    return unrealPage.Ischeck(log,pass);
+                    return unrealPage.Ischeck(log, pass);
                 }
             }
         }
