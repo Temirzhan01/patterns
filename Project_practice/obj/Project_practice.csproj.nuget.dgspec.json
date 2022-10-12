@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cross\\Source\\Repos\\Project_practice\\Project_practice\\Project_practice.csproj": {}
+    "C:\\Users\\Maksim\\Source\\Repos\\patterns\\Project_practice\\Project_practice.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cross\\Source\\Repos\\Project_practice\\Project_practice\\Project_practice.csproj": {
+    "C:\\Users\\Maksim\\Source\\Repos\\patterns\\Project_practice\\Project_practice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cross\\Source\\Repos\\Project_practice\\Project_practice\\Project_practice.csproj",
+        "projectUniqueName": "C:\\Users\\Maksim\\Source\\Repos\\patterns\\Project_practice\\Project_practice.csproj",
         "projectName": "Project_practice",
-        "projectPath": "C:\\Users\\cross\\Source\\Repos\\Project_practice\\Project_practice\\Project_practice.csproj",
-        "packagesPath": "C:\\Users\\cross\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cross\\Source\\Repos\\Project_practice\\Project_practice\\obj\\",
+        "projectPath": "C:\\Users\\Maksim\\Source\\Repos\\patterns\\Project_practice\\Project_practice.csproj",
+        "packagesPath": "C:\\Users\\Maksim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Maksim\\Source\\Repos\\patterns\\Project_practice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\cross\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Maksim\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

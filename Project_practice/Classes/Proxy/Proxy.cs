@@ -1,5 +1,6 @@
 ﻿using Project_practice.Models;
 using Microsoft.EntityFrameworkCore;
+using Project_practice.Classes.Proxy;
 
 namespace Project_practice.Classes.Proxy
 {

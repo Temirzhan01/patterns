@@ -1,6 +1,6 @@
-﻿namespace Project_practice.Classes.Proxy.Proxy
+﻿namespace Project_practice.Classes.Proxy
 {
-    interface Page
+    public interface Page
     {
         public bool Ischeck(string log, string pass);
     }
