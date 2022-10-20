@@ -12,10 +12,8 @@ namespace Project_practice.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        List<Card> cards = new List<Card>();
         Creator creatort = new TextCCReator();
         Creator creatorq = new QuestionCCreator();
-        Component root = new Branch("main");
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -34,12 +32,12 @@ namespace Project_practice.Controllers
             Card card;
             if (UserInfo.Login != null & UserInfo.Password != null)
             {
-                card = creatort.FactoryMethod(new Full(), a1, a2, a3, a4, key);
-                card.creator = UserInfo.Login;
+                card = creatort.FactoryMethod(a1, a2, a3, a4, key);
+                card.creator = UserInfo.Login!;
             }
             else
             {
-                card = creatort.FactoryMethod(new NotFull(), a1, a2, a3, a4, key);
+                card = creatort.FactoryMethod(a1, a2, a3, a4, key);
             }
             string json = Adapter.Converter(card);
 
@@ -49,12 +47,12 @@ namespace Project_practice.Controllers
             Card card;
             if (UserInfo.Login != null & UserInfo.Password != null)
             {
-                card = creatorq.FactoryMethod(new Full(), a1, a2, a3, a4, question);
-                card.creator = UserInfo.Login;
+                card = creatorq.FactoryMethod(a1, a2, a3, a4, question);
+                card.creator = UserInfo.Login!;
             }
             else
             {
-                card = creatorq.FactoryMethod(new NotFull(), a1, a2, a3, a4, question);
+                card = creatorq.FactoryMethod(a1, a2, a3, a4, question);
             }
             string json = Adapter.Converter(card);
         }

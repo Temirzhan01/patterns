@@ -1,6 +1,6 @@
 ﻿namespace Project_practice.Classes.Iterator
 {
-    public class Aggregate
+    public abstract class Aggregate
     {
     }
 }
