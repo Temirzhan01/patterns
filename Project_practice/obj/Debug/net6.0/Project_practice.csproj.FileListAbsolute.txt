@@ -116,3 +116,4 @@ C:\Users\Maksim\Source\Repos\patterns\Project_practice\obj\Debug\net6.0\Project_
 C:\Users\Maksim\Source\Repos\patterns\Project_practice\obj\Debug\net6.0\ref\Project_practice.dll
 C:\Users\Maksim\Source\Repos\patterns\Project_practice\obj\Debug\net6.0\Project_practice.pdb
 C:\Users\Maksim\Source\Repos\patterns\Project_practice\obj\Debug\net6.0\Project_practice.genruntimeconfig.cache
+C:\Users\cross\Source\Repos\Project_practice\Project_practice\bin\Debug\net6.0\Newtonsoft.Json.dll
