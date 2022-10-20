@@ -2,8 +2,14 @@
 {
     public static class UserInfo
     {
+        private static int id;
         private static string login;
         private static string password;
+        public static int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
         public static string Login
         {
             get { return login; }

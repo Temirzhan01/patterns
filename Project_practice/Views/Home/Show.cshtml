@@ -1,0 +1,12 @@
+﻿<h1>All cards</h1>
+@model IEnumerable<Project_practice.Models.Cardjson>
+
+<table class="table">
+     <tr><th>Cards</th></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.jsoncard</td>
+        </tr>
+    }
+</table>

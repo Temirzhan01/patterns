@@ -6,28 +6,38 @@ using Project_practice.Classes.Strategy;
 using Project_practice.Classes.Adapter;
 using Project_practice.Classes.Composite;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Project_practice.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        ApplicationContext context;
         Creator creatort = new TextCCReator();
         Creator creatorq = new QuestionCCreator();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            context = new ApplicationContext();
         }
-        public IActionResult IndexReal()
+        [HttpGet]
+        public async Task<IActionResult> IndexReal()
         {
-            return View();
+            return View(await context.Cardjsons.Where(x => x.userId == UserInfo.Id).ToListAsync());
         }
+        [HttpGet]
         public IActionResult IndexUnreal()
         {
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Show(IEnumerable<Cardjson> cardjsons) 
+        {
+            return PartialView(cardjsons);
+        }
         [HttpPost]
-        public void CreateTextCard(string key, string a1, string a2, string a3, string a4)
+        public async Task<IActionResult> CreateTextCard(string key, string a1, string a2, string a3, string a4)
         {
             Card card;
             if (UserInfo.Login != null & UserInfo.Password != null)
@@ -40,7 +50,12 @@ namespace Project_practice.Controllers
                 card = creatort.FactoryMethod(a1, a2, a3, a4, key);
             }
             string json = Adapter.Converter(card);
-
+            Cardjson cj = new Cardjson();
+            cj.userId = UserInfo.Id;
+            cj.jsoncard = json;
+            context.Cardjsons.Add(cj);
+            await context.SaveChangesAsync();
+            return RedirectToAction("IndexReal");
         }
         public void CreateQuestionCard(string question, string a1, string a2, string a3, string a4)
         {

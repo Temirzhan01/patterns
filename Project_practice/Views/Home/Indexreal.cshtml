@@ -1,4 +1,6 @@
-﻿<div class="container">
+﻿@model IEnumerable<Project_practice.Models.Cardjson>
+
+<div class="container">
     <div class="row">
         <div class="col-4">
             <input id="bt" class="buttons" name="button" type="radio" checked />
@@ -51,7 +53,7 @@
             </div>
         </div>
         <div class="col-8">
-            
+            @await Html.PartialAsync("Show",Model)
         </div>
     </div>
 </div>
