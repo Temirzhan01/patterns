@@ -12,5 +12,6 @@ namespace Project_practice.Classes.Factory
             this.key = key;
             values = new List<string>() { a1, a2, a3, a4 };
         }
+
     }
 }

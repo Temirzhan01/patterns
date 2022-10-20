@@ -16,7 +16,6 @@ namespace Project_practice.Controllers
         Creator creatort = new TextCCReator();
         Creator creatorq = new QuestionCCreator();
         Component root = new Branch("main");
-        string path = @"C:\Users\cross\Desktop";
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -36,6 +35,7 @@ namespace Project_practice.Controllers
             if (UserInfo.Login != null & UserInfo.Password != null)
             {
                 card = creatort.FactoryMethod(new Full(), a1, a2, a3, a4, key);
+                card.creator = UserInfo.Login;
             }
             else
             {
@@ -50,6 +50,7 @@ namespace Project_practice.Controllers
             if (UserInfo.Login != null & UserInfo.Password != null)
             {
                 card = creatorq.FactoryMethod(new Full(), a1, a2, a3, a4, question);
+                card.creator = UserInfo.Login;
             }
             else
             {

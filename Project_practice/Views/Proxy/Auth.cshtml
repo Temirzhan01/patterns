@@ -2,18 +2,19 @@
 @{
     Layout = "_LayoutAuth";
 }
-
-<h1>Авторизация</h1>
-<form asp-controller="Proxy" asp-action="Check">
-    <p>
-        <label asp-for="login">login</label><br />
-        <input type="text" asp-for="login" />
-    </p>
-    <p>
-        <label asp-for="password">password</label><br />
-        <input type="text" asp-for="password" />
-    </p>
-    <p>
-        <input type="submit" value="Отправить" />
-    </p>
-</form>
+<div class="container" style="padding-left:40%; padding-top:20%;">
+    <h2>Авторизация</h2>
+    <form asp-controller="Proxy" asp-action="Check">
+        <p class="font-monospace">
+            <label asp-for="login">Login</label><br />
+            <input type="text" asp-for="login" />
+        </p>
+        <p class="font-monospace">
+            <label asp-for="password">Password</label><br />
+            <input type="text" asp-for="password" />
+        </p>
+        <p>
+            <input type="submit" value="Отправить" />
+        </p>
+    </form>
+</div>
