@@ -1,0 +1,23 @@
+﻿<h1>All cards</h1>
+@model IEnumerable<Project_practice.Classes.Intermediate.Connecter>
+
+@foreach (var item in Model)
+    {
+    @foreach (var it in item.qcards)
+    {
+        <table>
+        <td>@it.key</td>
+        <td>@it.values[0]</td>
+        <td>@it.values[1]</td>
+        <td>@it.values[2]</td>
+        <td>@it.values[3]</td>
+        </table>
+    }
+     @foreach (var it in item.tcards)
+    {
+        <table>
+        <td>@it.key</td>
+        <td>@it.value</td>
+        </table>
+    }
+ }

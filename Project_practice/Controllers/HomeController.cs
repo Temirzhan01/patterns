@@ -5,6 +5,7 @@ using Project_practice.Classes.Singleton;
 using Project_practice.Classes.Strategy;
 using Project_practice.Classes.Adapter;
 using Project_practice.Classes.Composite;
+using Project_practice.Classes.Intermediate;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,17 +26,24 @@ namespace Project_practice.Controllers
         [HttpGet]
         public async Task<IActionResult> IndexReal()
         {
-            return View(strategy.Showing(await context.Cardjsons.Where(x => x.userId == UserInfo.Id).ToListAsync()).ToList());
+            strategy = new Full();
+            return View(strategy.Showing(await context.Cardjsons.Where(x => x.userId == UserInfo.Id).ToListAsync()));
         }
         [HttpGet]
         public IActionResult IndexUnreal()
         {
+            strategy = new NotFull();
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> Show(IEnumerable<Cardjson> cardjsons) 
+        public async Task<IActionResult> ShowReal(IEnumerable<Connecter> cards)
         {
-            return PartialView(cardjsons);
+            return PartialView(cards);
+        }
+        [HttpGet]
+        public async Task<IActionResult> ShowUnreal()
+        {
+            return PartialView();
         }
         [HttpPost]
         public async Task<IActionResult> CreateTextCard(string key, string a1, string a2, string a3, string a4)
@@ -46,14 +54,14 @@ namespace Project_practice.Controllers
                 card = creatort.FactoryMethod(a1, a2, a3, a4, key);
                 card.creator = UserInfo.Login!;
                 strategy = new Full();
-                await strategy.Creating(context,card);
+                await strategy.Creating(card, true);
                 return RedirectToAction("IndexReal");
             }
             else
             {
                 card = creatort.FactoryMethod(a1, a2, a3, a4, key);
                 strategy = new NotFull();
-                await strategy.Creating(context,card);
+                await strategy.Creating(card, true);
                 return RedirectToAction("IndexUnreal");
             }
         }
@@ -65,14 +73,14 @@ namespace Project_practice.Controllers
                 card = creatorq.FactoryMethod(a1, a2, a3, a4, question);
                 card.creator = UserInfo.Login!;
                 strategy = new Full();
-                await strategy.Creating(context,card);
+                await strategy.Creating(card, false);
                 return RedirectToAction("IndexReal");
             }
             else
             {
                 card = creatorq.FactoryMethod(a1, a2, a3, a4, question);
                 strategy = new NotFull();
-                await strategy.Creating(context, card);
+                await strategy.Creating(card, false);
                 return RedirectToAction("IndexUnreal");
             }
         }

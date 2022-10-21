@@ -2,6 +2,7 @@
 using Project_practice.Classes.Singleton;
 using Project_practice.Classes.Adapter;
 using Project_practice.Classes.Factory;
+using Project_practice.Classes.Intermediate;
 using Project_practice.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -10,32 +11,39 @@ namespace Project_practice.Classes.Strategy
 {
     public class Full : IStrategy
     {
-        public async Task Creating(ApplicationContext context,Card card)
+        public async Task Creating(Card card, bool type)
         {
             string json = Adapter.Adapter.Converter(card);
             Cardjson cj = new Cardjson();
             cj.userId = UserInfo.Id;
             cj.jsoncard = json;
-            context.Cardjsons.Add(cj);
-            await context.SaveChangesAsync();
+            cj.type = type;
+            using (ApplicationContext context = new ApplicationContext()) 
+            {
+                context.Cardjsons.Add(cj);
+                await context.SaveChangesAsync();
+            }
         }
-        public List<Card> Showing(IEnumerable<Cardjson> cardjsons)
+        public IEnumerable<Connecter> Showing(IEnumerable<Cardjson> cardjsons)
         {
             List<TextCard> textlist = new List<TextCard>();
             List<QuestionCard> questionlist = new List<QuestionCard>();
             foreach (Cardjson item in cardjsons) 
             {
-                QuestionCard cardq = JsonConvert.DeserializeObject<QuestionCard>(item.jsoncard)!;
-                if (cardq.values[1] != null)
-                {
-                    questionlist.Add(cardq);
-                }
-                else 
+                if (item.type)
                 {
                     TextCard cardt = JsonConvert.DeserializeObject<TextCard>(item.jsoncard)!;
-                    textlist.Add(cardt);
+                    textlist.Add(cardt);                    
+                }
+                else
+                {
+                    QuestionCard cardq = JsonConvert.DeserializeObject<QuestionCard>(item.jsoncard)!;
+                    questionlist.Add(cardq);
                 }
             }
+            List<Connecter> connecters = new List<Connecter>();
+            connecters.Add(new Connecter(textlist, questionlist));
+            return connecters.AsEnumerable();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Project_practice.Models.Cardjson>
+﻿@model IEnumerable<Project_practice.Classes.Intermediate.Connecter>
 
 <div class="container">
     <div class="row">
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="col-8">
-            @await Html.PartialAsync("Show",Model)
+            @await Html.PartialAsync("ShowReal",Model)
         </div>
     </div>
 </div>
