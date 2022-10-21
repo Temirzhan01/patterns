@@ -16,6 +16,7 @@ namespace Project_practice.Controllers
         ApplicationContext context;
         Creator creatort = new TextCCReator();
         Creator creatorq = new QuestionCCreator();
+        IStrategy strategy;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -24,7 +25,7 @@ namespace Project_practice.Controllers
         [HttpGet]
         public async Task<IActionResult> IndexReal()
         {
-            return View(await context.Cardjsons.Where(x => x.userId == UserInfo.Id).ToListAsync());
+            return View(strategy.Showing(await context.Cardjsons.Where(x => x.userId == UserInfo.Id).ToListAsync()).ToList());
         }
         [HttpGet]
         public IActionResult IndexUnreal()
@@ -44,32 +45,36 @@ namespace Project_practice.Controllers
             {
                 card = creatort.FactoryMethod(a1, a2, a3, a4, key);
                 card.creator = UserInfo.Login!;
+                strategy = new Full();
+                await strategy.Creating(context,card);
+                return RedirectToAction("IndexReal");
             }
             else
             {
                 card = creatort.FactoryMethod(a1, a2, a3, a4, key);
+                strategy = new NotFull();
+                await strategy.Creating(context,card);
+                return RedirectToAction("IndexUnreal");
             }
-            string json = Adapter.Converter(card);
-            Cardjson cj = new Cardjson();
-            cj.userId = UserInfo.Id;
-            cj.jsoncard = json;
-            context.Cardjsons.Add(cj);
-            await context.SaveChangesAsync();
-            return RedirectToAction("IndexReal");
         }
-        public void CreateQuestionCard(string question, string a1, string a2, string a3, string a4)
+        public async Task<IActionResult> CreateQuestionCard(string question, string a1, string a2, string a3, string a4)
         {
             Card card;
             if (UserInfo.Login != null & UserInfo.Password != null)
             {
                 card = creatorq.FactoryMethod(a1, a2, a3, a4, question);
                 card.creator = UserInfo.Login!;
+                strategy = new Full();
+                await strategy.Creating(context,card);
+                return RedirectToAction("IndexReal");
             }
             else
             {
                 card = creatorq.FactoryMethod(a1, a2, a3, a4, question);
+                strategy = new NotFull();
+                await strategy.Creating(context, card);
+                return RedirectToAction("IndexUnreal");
             }
-            string json = Adapter.Converter(card);
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

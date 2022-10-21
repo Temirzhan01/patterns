@@ -1,12 +1,13 @@
 ﻿<h1>All cards</h1>
-@model IEnumerable<Project_practice.Models.Cardjson>
+@model IEnumerable<Project_practice.Classes.Factory.TextCard>
 
 <table class="table">
      <tr><th>Cards</th></tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.jsoncard</td>
+            <td>@item.key</td>
+            <td>@item.value</td>
         </tr>
     }
 </table>

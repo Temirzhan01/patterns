@@ -12,5 +12,16 @@
         {
             children.Remove(c);
         }
+        public bool Check(Component c)
+        {
+            for (int i = 0; i < children.Count; i++) 
+            {
+                if (children[i] == c) 
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
