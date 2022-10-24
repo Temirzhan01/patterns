@@ -14,10 +14,10 @@ namespace Project_practice.Controllers
         }
         public IActionResult Check(string login, string password)
         {
-            Page page = new Proxy();
+            Proxy proxy = new Proxy();
             UserInfo.Login = login;
             UserInfo.Password = password;
-            bool fl = page.Ischeck(login, password);
+            bool fl = proxy.Ischeck(login, password);
             if (fl)
             {
                 return Redirect("~/Home/Indexreal");

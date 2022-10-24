@@ -5,7 +5,7 @@ using Project_practice.Classes.Singleton;
 
 namespace Project_practice.Classes.Proxy
 {
-    public class Proxy : Page
+    public class Proxy
     {
         public Proxy() { }
         public bool Ischeck(string log, string pass)
@@ -17,13 +17,11 @@ namespace Project_practice.Classes.Proxy
                 if (logi?.Any() ?? false)
                 {
                     UserInfo.Id = id;
-                    RealPage realPage = new RealPage();
-                    return realPage.Ischeck(log, pass);
+                    return true;
                 }
                 else
                 {
-                    UnrealPage unrealPage = new UnrealPage();
-                    return unrealPage.Ischeck(log, pass);
+                    return false;
                 }
             }
         }
