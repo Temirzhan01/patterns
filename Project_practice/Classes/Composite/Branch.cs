@@ -4,20 +4,9 @@
     {
         List<Component> children = new List<Component>();
         public Branch(string name) : base(name) { }
-        public bool Check(Component c)
-        {
-           foreach (var item in children) {
-                    if (item == c)
-                    {
-                        return true;
-                    }
-           }
-            return false;
-        }
         public override void Add(Component c) 
         {
-            bool b = Check(c);
-            if (b == false)
+            if (!Check(c.Name())) 
             {
                 children.Add(c);
             }
@@ -26,6 +15,23 @@
         {
             children.Remove(c);
         }
-      
+        public override bool Check(string s)
+        {
+            foreach(Component item in children) 
+            {
+                if (item.Name() == s) { return true; }
+            }
+            return false;
+        }
+        public override void Update(Component c)
+        {
+            foreach (Component item in children)
+            {
+                if (item.Name() == c.Name()) 
+                {
+                    item.Add(c);
+                }
+            }
+        }
     }
 }

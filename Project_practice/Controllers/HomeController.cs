@@ -9,22 +9,13 @@ using Project_practice.Classes.Composite;
 using Project_practice.Classes.Intermediate;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 namespace Project_practice.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         ApplicationContext context;
-        Creator creatort = new TextCCReator();
-        Creator creatorq = new QuestionCCreator();
         IStrategy strategy;
-        static Component texts = new Branch("Text");
-        static Component questions = new Branch("Question");
-        static int ct = 0;
-        static Aggregate a = new ConcreteAggregate();
-        
-
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -37,99 +28,44 @@ namespace Project_practice.Controllers
             return View(strategy.Showing(await context.Cardjsons.Where(x => x.userId == UserInfo.Id).ToListAsync()));
         }
         [HttpGet]
-        public IActionResult IndexUnreal()
+        public async Task<IActionResult> IndexUnreal()
         {
             strategy = new NotFull();
-            return View();
+            return View(strategy.Showing(await context.Cardjsons.Where(x => x.userId == UserInfo.Id).ToListAsync()));
         }
         [HttpGet]
-        public async Task<IActionResult> ShowReal(IEnumerable<Connecter> cards)
+        public async Task<IActionResult> Show(IEnumerable<Connecter> cards)
         {
             return PartialView(cards);
-        }
-        [HttpGet]
-        public async Task<IActionResult> ShowUnreal()
-        {
-            return PartialView();
         }
         [HttpPost]
         public async Task<IActionResult> CreateTextCard(string key, string a1, string a2, string a3, string a4)
         {
-            Card card;
-            Iterator i = a.CreateIterator();
             if (UserInfo.Login != null & UserInfo.Password != null)
             {
-                card = creatort.FactoryMethod(a1, a2, a3, a4, key);
-                card.creator = UserInfo.Login!;
                 strategy = new Full();
-                await strategy.Creating(card, true);
-                Leaf lf = new Leaf(key, card);
-                texts.Add(lf);
-                MainRoot.main.Add(texts);
-                a[ct] = lf;
-                ct++;
-                object item = i.First();
-                while (!i.IsDone())
-                {
-                    item = i.Next();
-                }
+                await strategy.Creating(true, key, a1, a2, a3, a4);
                 return RedirectToAction("IndexReal");
             }
             else
             {
-                card = creatort.FactoryMethod(a1, a2, a3, a4, key);
                 strategy = new NotFull();
-                await strategy.Creating(card, true);
-                Leaf lf = new Leaf(key, card);
-                texts.Add(lf);
-                MainRoot.main.Add(texts);
-                a[ct] = lf;
-                ct++;
-                object item = i.First();
-                while (!i.IsDone())
-                {
-                    item = i.Next();
-                }
+                await strategy.Creating(true, key, a1, a2, a3, a4);
                 return RedirectToAction("IndexUnreal");
             }
         }
-        public async Task<IActionResult> CreateQuestionCard(string question, string a1, string a2, string a3, string a4)
+        public async Task<IActionResult> CreateQuestionCard(string key, string a1, string a2, string a3, string a4)
         {
-            Card card;
-            Iterator i = a.CreateIterator();
             if (UserInfo.Login != null & UserInfo.Password != null)
             {
-                card = creatorq.FactoryMethod(a1, a2, a3, a4, question);
-                card.creator = UserInfo.Login!;
                 strategy = new Full();
-                await strategy.Creating(card, false);
-                Leaf lf = new Leaf(question, card);
-                questions.Add(lf);
-                MainRoot.main.Add(questions);
-                a[ct] = lf;
-                ct++;
-                object item = i.First();
-                while (!i.IsDone())
-                {
-                    item = i.Next();
-                }
+                await strategy.Creating(false, key, a1, a2, a3, a4);
                 return RedirectToAction("IndexReal");
             }
             else
             {
-                card = creatorq.FactoryMethod(a1, a2, a3, a4, question);
                 strategy = new NotFull();
-                await strategy.Creating(card, false);
-                Leaf lf = new Leaf(question, card);
-                questions.Add(lf);
-                MainRoot.main.Add(questions);
-                a[ct] = lf;
-                ct++;
-                object item = i.First();
-                while (!i.IsDone())
-                {
-                    item = i.Next();
-                }
+                await strategy.Creating(false,key, a1, a2, a3, a4);
                 return RedirectToAction("IndexUnreal");
             }
         }

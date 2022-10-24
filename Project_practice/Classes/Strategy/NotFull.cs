@@ -9,14 +9,27 @@ namespace Project_practice.Classes.Strategy
 {
     public class NotFull : IStrategy
     {
-        public async Task Creating(Card card, bool type)
+        public async Task Creating(bool type, string key, string a1, string a2, string a3, string a4)
         {
-            Component comp = new Branch(card.creator);
-            Component leaf = new Leaf("card", card);
-            comp.Add(leaf);
-            MainRoot.main.Add(comp);
+            Creator creator;
+            Component branch;
+            if (type)
+            {
+                creator = new TextCCReator();
+                branch = new Branch("texts");
+            }
+            else
+            {
+                creator = new QuestionCCreator();
+                branch = new Branch("questions");
+            }
+            Card card;
+            card = creator.FactoryMethod(a1, a2, a3, a4, key);
+            MainRoot.main.Add(branch);
+            Component leaf = new Leaf(MainRoot.i.ToString(),card);
+            MainRoot.main.Update(leaf);
         }
-        public IEnumerable<Connecter> Showing(IEnumerable<Cardjson> cardjsons) 
+        public IEnumerable<Connecter> Showing(IEnumerable<Cardjson> cardjsons)
         {
             return null;
         }

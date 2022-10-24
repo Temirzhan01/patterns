@@ -11,8 +11,20 @@ namespace Project_practice.Classes.Strategy
 {
     public class Full : IStrategy
     {
-        public async Task Creating(Card card, bool type)
+        public async Task Creating(bool type, string key, string a1, string a2, string a3, string a4)
         {
+            Creator creator;
+            if (type)
+            {
+                creator = new TextCCReator();
+            }
+            else 
+            {
+                creator = new QuestionCCreator();
+            }
+            Card card;
+            card = creator.FactoryMethod(a1, a2, a3, a4, key);
+            card.creator = UserInfo.Login!;
             string json = Adapter.Adapter.Converter(card);
             Cardjson cj = new Cardjson();
             cj.userId = UserInfo.Id;

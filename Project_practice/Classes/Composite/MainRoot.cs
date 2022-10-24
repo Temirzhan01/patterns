@@ -3,5 +3,6 @@
     public static class MainRoot
     {
         public static Component main = new Branch("main");
+        public static int i = 0;
     }
 }
