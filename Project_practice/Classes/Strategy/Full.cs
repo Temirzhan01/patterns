@@ -24,7 +24,6 @@ namespace Project_practice.Classes.Strategy
             }
             Card card;
             card = creator.FactoryMethod(a1, a2, a3, a4, key);
-            card.creator = UserInfo.Login!;
             string json = Adapter.Adapter.Converter(card);
             Cardjson cj = new Cardjson();
             cj.userId = UserInfo.Id;
