@@ -1,8 +1,11 @@
-﻿namespace Project_practice.Classes.Composite
+﻿using Project_practice.Classes.Iterator;
+
+namespace Project_practice.Classes.Composite
 {
     public class Branch : Component
     {
         List<Component> children = new List<Component>();
+        int index = 0;
         public Branch(string name) : base(name) { }
         public override void Add(Component c) 
         {
@@ -23,15 +26,18 @@
             }
             return false;
         }
-        public override void Update(Component c)
+        public override Iterator.Iterator CreateIterator()
         {
-            foreach (Component item in children)
-            {
-                if (item.Name() == c.Name()) 
-                {
-                    item.Add(c);
-                }
-            }
+            return new CompositeIterator(this);
+        }
+        public override int Count
+        {
+            get { return children.Count; }
+            protected set { }
+        }
+        public override Component this[int index]
+        {
+            get { return children[index]; }
         }
     }
 }

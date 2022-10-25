@@ -9,7 +9,7 @@ namespace Project_practice.Models
         public ApplicationContext() :base() { Database.EnsureCreated(); }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-B3ADH4H\SQLEXPRESS;Database=appbd;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=appbd;Trusted_Connection=True;");
         }
     }
 }

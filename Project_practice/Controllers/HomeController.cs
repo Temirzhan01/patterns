@@ -4,7 +4,6 @@ using Project_practice.Classes.Factory;
 using Project_practice.Classes.Singleton;
 using Project_practice.Classes.Strategy;
 using Project_practice.Classes.Adapter;
-using Project_practice.Classes.Iterator;
 using Project_practice.Classes.Composite;
 using Project_practice.Classes.Intermediate;
 using System.Diagnostics;

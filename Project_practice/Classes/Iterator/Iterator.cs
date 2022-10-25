@@ -1,11 +1,12 @@
-﻿namespace Project_practice.Classes.Iterator
+﻿using Project_practice.Classes.Composite;
+
+namespace Project_practice.Classes.Iterator
 {
     public interface Iterator
     {
-        public abstract object First();
         public abstract bool HasNext();
-        public abstract object Next();
-        public abstract bool IsDone();
-        public abstract object CurrentItem();
+        public abstract Component Next();
+        public abstract Component CurrentItem();
+        public abstract Component First();
     }
 }
