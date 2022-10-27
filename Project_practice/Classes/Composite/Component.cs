@@ -10,6 +10,7 @@ namespace Project_practice.Classes.Composite
         public string Name() { return name; }
         public virtual void Add(Component c) { }
         public virtual void Remove(Component c) { }
+        public virtual void Clear() { }
         public virtual bool Check(string s) { return false; }
         public virtual Card GetCard() { return null; }
         public virtual Iterator.Iterator CreateIterator() { return null; }

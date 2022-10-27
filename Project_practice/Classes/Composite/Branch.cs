@@ -26,6 +26,10 @@ namespace Project_practice.Classes.Composite
             }
             return false;
         }
+        public override void Clear()
+        {
+            children.Clear();
+        }
         public override Iterator.Iterator CreateIterator()
         {
             return new CompositeIterator(this);

@@ -40,7 +40,7 @@ namespace Project_practice.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTextCard(string key, string a1, string a2, string a3, string a4)
         {
-            if (UserInfo.Login != null & UserInfo.Password != null)
+            if (UserInfo.Login != null && UserInfo.Password != null && UserInfo.Id != 0)
             {
                 strategy = new Full();
                 await strategy.Creating(true, key, a1, a2, a3, a4);
@@ -55,7 +55,7 @@ namespace Project_practice.Controllers
         }
         public async Task<IActionResult> CreateQuestionCard(string key, string a1, string a2, string a3, string a4)
         {
-            if (UserInfo.Login != null & UserInfo.Password != null)
+            if (UserInfo.Login != null && UserInfo.Password != null && UserInfo.Id != 0)
             {
                 strategy = new Full();
                 await strategy.Creating(false, key, a1, a2, a3, a4);
