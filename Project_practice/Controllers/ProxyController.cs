@@ -15,11 +15,11 @@ namespace Project_practice.Controllers
         public IActionResult Check(string login, string password)
         {
             Proxy proxy = new Proxy();
-            UserInfo.Login = login;
-            UserInfo.Password = password;
             bool fl = proxy.Ischeck(login, password);
             if (fl)
             {
+                UserInfo.Login = login;
+                UserInfo.Password = password;
                 return Redirect("~/Home/Indexreal");
             }
             else return Redirect("~/Home/Indexunreal");
